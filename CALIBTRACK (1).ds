@@ -1,0 +1,3661 @@
+/*
+ * Author       : dharshini.g2.2024.cse_raj205
+ * Generated on : 02-Nov-2026 11:41:54
+ * Version      : 1.0
+ */
+ application "CALIBTRACK"
+ {
+ 	date format = "dd-MMM-yyyy"
+ 	time zone = "UTC"
+ 	time format = "24-hr"
+
+ 	forms
+	{
+		form Calibration_Certificate_Form
+		{
+			displayname = "Calibration Certificate Form"
+			success message = "Calibration Certificate Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Certificate_ID
+			(
+    			type = text
+				displayname = "Certificate ID"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Certificate_Number
+			(
+    			type = text
+				displayname = "Certificate Number"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Equipment
+			(
+				type = picklist	
+				values  = Equipment_Form.ID
+    			displayformat = [Equipment_Name]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Calibration_Record_Form
+			(
+				type = picklist	
+				displayname = "Calibration Record Form"
+				values  = Calibration_Record_Form.ID
+    			displayformat = [Calibration_Record_ID]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Issue_Date
+			(
+    			type = date
+				displayname = "Issue Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Valid_From
+			(
+    			type = date
+				displayname = "Valid From"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Valid_Until
+			(
+    			type = date
+				displayname = "Valid Until"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Certificate_Status
+			(
+				type = radiobuttons
+				displayname = "Certificate Status"
+				maxchar = 100
+				values = {"Valid","Expiring Soon","Expired","Suspended"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Certificate_File
+			(
+    			type = upload file
+				displayname = "Certificate File"
+    			file count = 10
+				browse = local_drive
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Remarks
+			(
+    			type = textarea
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Calibration_Record_Form
+		{
+			displayname = "Calibration Record Form"
+			success message = "Calibration Record Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Calibration_Record_ID
+			(
+    			type = autonumber
+				displayname = "Calibration Record ID"
+				start index = 1
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Equipment
+			(
+				type = picklist	
+				values  = Equipment_Form.ID
+    			displayformat = [Equipment_Name]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Calibration_Date
+			(
+    			type = date
+				displayname = "Calibration Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Technician
+			(
+				type = picklist	
+				values  = Technician_Form.ID
+    			displayformat = [Technician_Name]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Calibration_Method
+			(
+				type = picklist
+				displayname = "Calibration Method"
+				maxchar = 100
+				values = {"Routine Calibration","Recalibration","Initial Calibration","Post-Repair Calibration"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Calibration_Result
+			(
+				type = radiobuttons
+				displayname = "Calibration Result"
+				maxchar = 100
+				values = {"Passed","Failed"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Overall_Remarks
+			(
+    			type = textarea
+				displayname = "Overall Remarks"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Next_Calibration_Date
+			(
+    			type = date
+				displayname = "Next Calibration Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Calibration_Parameters
+			(
+				type = grid
+				displayname = "Calibration Parameters"
+				Parameter_Name
+				(
+    				type = text
+					displayname = "Parameter Name"
+					width = medium
+				)
+				Standard_Value
+				(
+					type = decimal
+					displayname = "Standard Value"
+					width = medium
+				)
+				Actual_Value
+				(
+					type = decimal
+					displayname = "Actual Value"
+					width = medium
+				)
+				Tolerance
+				(
+					type = decimal
+					width = medium
+				)
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+			Section1
+			(
+				type = section
+				displayname = "Section"
+				visibility = true
+	 			row = 3
+	 			column = 0   
+				width = medium
+			)
+			Unit
+			(
+				type = picklist
+				maxchar = 100
+				values = {"kg","g","mg","°C","°F","mL","L"}
+	 			row = 3
+	 			column = 1   
+				width = medium
+			)
+			Result
+			(
+				type = radiobuttons
+				maxchar = 100
+				values = {"Pass","Fail"}
+	 			row = 3
+	 			column = 1   
+				width = medium
+			)
+			Remarks
+			(
+    			type = text
+	 			row = 3
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Calibration_Schedule_Form
+		{
+			displayname = "Calibration Schedule Form"
+			success message = "Calibration Schedule Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Schedule_ID
+			(
+    			type = autonumber
+				displayname = "Schedule ID"
+				start index = 1
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Equipment
+			(
+				type = picklist	
+				values  = Equipment_Form.ID
+    			displayformat = [Equipment_Name]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Laboratory
+			(
+				type = picklist	
+				values  = Laboratory_Form.ID
+    			displayformat = [Laboratory_Name]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Calibration_Type
+			(
+				type = picklist
+				displayname = "Calibration Type"
+				maxchar = 100
+				values = {"Routine Calibration","Recalibration","Initial Calibration","Post-Repair Calibration"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Scheduled_Date
+			(
+    			type = date
+				displayname = "Scheduled Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Assigned_Technician
+			(
+				type = picklist	
+				displayname = "Assigned Technician"
+				values  = Technician_Form.ID
+    			displayformat = [Technician_Name]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Priority
+			(
+				type = radiobuttons
+				maxchar = 100
+				values = {"Low","Medium","High","Urgent"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Schedule_Status
+			(
+				type = picklist
+				displayname = "Schedule Status"
+				maxchar = 100
+				values = {"Scheduled","Assigned","In Progress","Completed","Cancelled","Overdue"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Remarks
+			(
+    			type = textarea
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Equipment_Form
+		{
+			displayname = "Equipment Form"
+			success message = "Equipment Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Equipment_ID
+			(
+    			type = autonumber
+				displayname = "Equipment ID"
+				start index = 1
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Equipment_Name
+			(
+    			type = text
+				displayname = "Equipment Name"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Equipment_Category
+			(
+				type = picklist
+				displayname = "Equipment Category"
+				maxchar = 100
+				values = {"Measuring Instrument","Electrical Equipment","Electronic Equipment","Laboratory Instrument","Testing Equipment","Safety Equipment","Other"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Laboratory
+			(
+				type = picklist	
+				values  = Laboratory_Form.ID
+    			displayformat = [Laboratory_Name]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Manufacturer
+			(
+    			type = text
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Model_Number
+			(
+    			type = text
+				displayname = "Model Number"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Serial_Number
+			(
+    			type = text
+				displayname = "Serial Number"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Purchase_Date
+			(
+    			type = date
+				displayname = "Purchase Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Purchase_Cost
+			(
+				displayname = "Purchase Cost"
+				type = INR
+				format = commadotindian
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Last_Calibration_Date
+			(
+    			type = date
+				displayname = "Last Calibration Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Calibration_Interval
+			(
+				type = picklist
+				displayname = "Calibration Interval"
+				maxchar = 100
+				values = {"3 Months","6 Months","12 Months","24 Months"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Next_Calibration_Date
+			(
+    			type = date
+				displayname = "Next Calibration Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Equipment_Status
+			(
+				type = radiobuttons
+				displayname = "Equipment Status"
+				maxchar = 100
+				values = {"Active","Under Maintenance","Calibration Due","Calibration Expired","Retired"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Equipment_Image
+			(
+    			type = image
+				displayname = "Equipment Image"
+				source  = file
+    			file count = 10
+				camera = primary
+				show gallery = true
+				switch camera = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Equipment_Description
+			(
+    			type = textarea
+				displayname = "Equipment Description"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Equipment_Inspection_Form
+		{
+			displayname = "Equipment Inspection Form"
+			success message = "Equipment Inspection Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Inspection_ID
+			(
+    			type = autonumber
+				displayname = "Inspection ID"
+				start index = 1
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Equipment_Form
+			(
+				type = picklist	
+				displayname = "Equipment Form"
+				values  = Equipment_Form.ID
+    			displayformat = [Equipment_Name]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Inspection_Date
+			(
+    			type = date
+				displayname = "Inspection Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Inspector
+			(
+    			type = text
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Physical_Condition
+			(
+				type = radiobuttons
+				displayname = "Physical Condition"
+				maxchar = 100
+				values = {"Good","Fair","Poor"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Functional_Condition
+			(
+				type = radiobuttons
+				displayname = "Functional Condition"
+				maxchar = 100
+				values = {"Working","Partially Working","Not Working"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Safety_Condition
+			(
+				type = radiobuttons
+				displayname = "Safety Condition"
+				maxchar = 100
+				values = {"Safe","Unsafe"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Inspection_Result
+			(
+				type = radiobuttons
+				displayname = "Inspection Result"
+				maxchar = 100
+				values = {"Passed","Failed"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Issues_Found
+			(
+    			type = textarea
+				displayname = "Issues Found"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Recommended_Action
+			(
+				type = picklist
+				displayname = "Recommended Action"
+				maxchar = 100
+				values = {"No Action Required","Calibration","Maintenance","Replacement","Further Inspection"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Inspection_Remarks
+			(
+    			type = textarea
+				displayname = "Inspection Remarks"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Laboratory_Form
+		{
+			displayname = "Laboratory Form"
+			success message = "Laboratory Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Laboratory_ID
+			(
+    			type = text
+				displayname = "Laboratory ID"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Laboratory_Name
+			(
+    			type = text
+				displayname = "Laboratory Name"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Department
+			(
+				type = picklist
+				maxchar = 100
+				values = {"Physics","Chemistry","Biology","Computer Science","Electronics","Mechanical","Civil","Other"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Location
+			(
+    			type = text
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Floor_Room_No
+			(
+    			type = text
+				displayname = "Floor / Room No."
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Lab_In_charge
+			(
+    			type = text
+				displayname = "Lab In-charge"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Contact_Number
+			(
+    			type = phonenumber
+				displayname = "Contact Number"
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Email
+			(
+    			type = email
+				maxchar = 80
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Laboratory_Status
+			(
+				type = radiobuttons
+				displayname = "Laboratory Status"
+				maxchar = 100
+				values = {"Active","Inactive"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Description
+			(
+    			type = textarea
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Maintenance_Request_Form
+		{
+			displayname = "Maintenance Request Form"
+			success message = "Maintenance Request Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Maintenance_ID
+			(
+    			type = autonumber
+				displayname = "Maintenance ID"
+				start index = 1
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Equipment
+			(
+				type = picklist	
+				values  = Equipment_Form.ID
+    			displayformat = [Equipment_Name]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Laboratory
+			(
+				type = picklist	
+				values  = Laboratory_Form.ID
+    			displayformat = [Laboratory_Name]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Reported_By
+			(
+    			type = text
+				displayname = "Reported By"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Request_Date
+			(
+    			type = date
+				displayname = "Request Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Problem_Type
+			(
+				type = picklist
+				displayname = "Problem Type"
+				maxchar = 100
+				values = {"Equipment Not Working","Inaccurate Reading","Physical Damage","Electrical Problem","Software/Firmware Problem","Other"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Problem_Description
+			(
+    			type = textarea
+				displayname = "Problem Description"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Priority
+			(
+				type = radiobuttons
+				maxchar = 100
+				values = {"Low","Medium","High","Critical"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Assigned_Technician
+			(
+				type = picklist	
+				displayname = "Assigned Technician"
+				values  = Technician_Form.ID
+    			displayformat = [Technician_Name]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Maintenance_Status
+			(
+				type = picklist
+				displayname = "Maintenance Status"
+				maxchar = 100
+				values = {"Open","Assigned","In Progress","Completed","Cancelled"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Completion_Date
+			(
+    			type = date
+				displayname = "Completion Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Repair_Cost
+			(
+				displayname = "Repair Cost"
+				type = INR
+				format = commadotindian
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Repair_Remarks
+			(
+    			type = textarea
+				displayname = "Repair Remarks"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form New_Request
+		{
+			displayname = "New Request"
+			success message = "Data Added Successfully!"
+			Section1
+			(
+				type = section
+				displayname = "Section"
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			plain
+			(
+    			type = plaintext
+				value = "<p style=\"margin: 0px 0px 0pt; line-height: 1.2; text-align: left; direction: ltr\" class=\"zw-paragraph heading0\"><span style=\"color: rgb(0, 0, 0)\" class=\"colour\"><span style=\"font-family: Lato\" class=\"font\"><span style=\"font-size: 12pt; vertical-align: baseline; font-weight: 400\" class=\"size\">💡 </span><span style=\"font-size: 12pt; font-weight: 600; vertical-align: baseline\" class=\"size\">Creator tip:</span><span style=\"font-size: 12pt; vertical-align: baseline; font-weight: 400\" class=\"size\"> Use this sample form to capture data. Below is an example of how it may look.</span></span></span><br /></p><p style=\"margin: 0px 0px 0pt; line-height: 1.2; text-align: left; direction: ltr\" class=\"zw-paragraph heading0\"><br /></p><div><span style=\"color: rgb(0, 0, 0)\" class=\"colour\"><span style=\"font-family: Lato\" class=\"font\"><span style=\"font-size: 12pt; vertical-align: baseline; font-weight: 400\" class=\"size\">Feel free to tweak things via the </span></span></span><span style=\"color: rgb(0, 0, 0)\" class=\"colour\"><span style=\"font-family: Lato\" class=\"font\"><span style=\"font-size: 12pt; vertical-align: baseline; font-weight: 400\" class=\"size\">form builder. Every form submission is recorded in a </span></span></span><span style=\"color: rgb(0, 0, 0)\" class=\"colour\"><span style=\"font-family: Lato\" class=\"font\"><span style=\"font-size: 12pt; vertical-align: baseline; font-weight: 400\" class=\"size\">r</span></span></span><span style=\"color: rgb(0, 0, 0)\" class=\"colour\"><span style=\"font-family: Lato\" class=\"font\"><span style=\"font-size: 12pt; vertical-align: baseline; font-weight: 400\" class=\"size\">eport and can be visuali</span></span></span><span style=\"color: rgb(0, 0, 0)\" class=\"colour\"><span style=\"font-family: Lato\" class=\"font\"><span style=\"font-size: 12pt; vertical-align: baseline; font-weight: 400\" class=\"size\">z</span></span></span><span style=\"color: rgb(0, 0, 0)\" class=\"colour\"><span style=\"font-family: Lato\" class=\"font\"><span style=\"font-size: 12pt; vertical-align: baseline; font-weight: 400\" class=\"size\">ed.</span></span></span><br /></div><p style=\"margin: 0px 0px 0pt; line-height: 1.2; text-align: left; direction: ltr\" class=\"zw-paragraph heading0\"><span class=\"EOP\">&nbsp;</span><br /></p><div><span style=\"background-color: rgba(0, 0, 0, 0)\" class=\"highlight\"><span style=\"color: rgb(0, 0, 0)\" class=\"colour\"><span style=\"font-family: Lato\" class=\"font\"><span style=\"font-size: 12pt; font-variant: normal; text-decoration: none; letter-spacing: 0pt; font-weight: 400; vertical-align: baseline; font-style: normal\" class=\"size\">Note: If you're capturing sensitive data via a field, take a look at the field's properties to make </span></span></span></span><span style=\"background-color: rgba(0, 0, 0, 0)\" class=\"highlight\"><span style=\"color: rgb(0, 0, 0)\" class=\"colour\"><span style=\"font-family: Lato\" class=\"font\"><span style=\"font-size: 12pt; vertical-align: baseline; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; letter-spacing: 0pt\" class=\"size\">sure </span></span></span></span><span style=\"background-color: rgba(0, 0, 0, 0)\" class=\"highlight\"><span style=\"color: rgb(0, 0, 0)\" class=\"colour\"><span style=\"font-family: Lato\" class=\"font\"><span style=\"font-size: 12pt; font-variant: normal; text-decoration: none; letter-spacing: 0pt; font-weight: 400; vertical-align: baseline; font-style: normal\" class=\"size\">it</span></span></span></span><span style=\"background-color: rgba(0, 0, 0, 0)\" class=\"highlight\"><span style=\"color: rgb(0, 0, 0)\" class=\"colour\"><span style=\"font-family: Lato\" class=\"font\"><span style=\"font-size: 12pt; vertical-align: baseline; font-weight: 400; font-style: normal; font-variant: normal; text-decoration: none; letter-spacing: 0pt\" class=\"size\">'s</span></span></span></span><span style=\"background-color: rgba(0, 0, 0, 0)\" class=\"highlight\"><span style=\"color: rgb(0, 0, 0)\" class=\"colour\"><span style=\"font-family: Lato\" class=\"font\"><span style=\"font-size: 12pt; font-variant: normal; text-decoration: none; letter-spacing: 0pt; font-weight: 400; vertical-align: baseline; font-style: normal\" class=\"size\"> secured.</span></span></span></span><br /></div>"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Add_New
+			(
+				type = section
+				displayname = "Add New"
+				visibility = true
+	 			row = 2
+	 			column = 0   
+				width = medium
+			)
+			Type
+			(
+				type = radiobuttons
+				values = {"Event Registration","Public Feedback","Service Request"}
+				others option = true
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+			Category_Event
+			(
+    			type = text
+				displayname = "Category/Event"
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+			Date1
+			(
+    			type = date
+				displayname = "Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+			Status
+			(
+				type = picklist
+				values = {"Addressed","Cancelled","Completed","Confirmed","In Progress","Pending","Under Review","Waitlisted"}
+				others option = true
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+			Details
+			(
+    			type = text
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+			Notes_Response
+			(
+    			type = text
+				displayname = "Notes/Response"
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Technician_Form
+		{
+			displayname = "Technician Form"
+			success message = "Technician Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Technician_ID
+			(
+    			type = autonumber
+				displayname = "Technician ID"
+				start index = 1
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Technician_Name
+			(
+    			type = text
+				displayname = "Technician Name"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Specialization
+			(
+				type = picklist
+				maxchar = 100
+				values = {"Electrical","Electronics","Mechanical","Chemical","Measurement & Instrumentation","General"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Phone_Number1
+			(
+    			type = phonenumber
+				displayname = "Phone Number"
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Email
+			(
+    			type = email
+				maxchar = 80
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Qualification
+			(
+    			type = text
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Experience
+			(
+				type = number
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Technician_Status
+			(
+				type = radiobuttons
+				displayname = "Technician Status"
+				maxchar = 100
+				values = {"Available","Busy","Inactive"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+	}
+	reports
+	{
+		default list All_Laboratories
+		{
+			displayName = "All Laboratories"
+			show all rows from Laboratory_Form    
+			(
+				Laboratory_ID as "Laboratory ID"
+				Laboratory_Name as "Laboratory Name"
+				Department
+				Location
+				Floor_Room_No as "Floor / Room No."
+				Lab_In_charge as "Lab In-charge"
+				Contact_Number as "Contact Number"
+				(
+					displayformat = plainnumber 
+				)
+				Email
+				Laboratory_Status as "Laboratory Status"
+				Description
+			)
+		}
+		default list All_Equipment
+		{
+			displayName = "All Equipment"
+			show all rows from Equipment_Form    
+			(
+				Equipment_ID as "Equipment ID"
+				Equipment_Name as "Equipment Name"
+				Equipment_Category as "Equipment Category"
+				Laboratory
+				Manufacturer
+				Model_Number as "Model Number"
+				Serial_Number as "Serial Number"
+				Purchase_Date as "Purchase Date"
+				Purchase_Cost as "Purchase Cost"
+				Last_Calibration_Date as "Last Calibration Date"
+				Calibration_Interval as "Calibration Interval"
+				Equipment_Status as "Equipment Status"
+				Equipment_Image as "Equipment Image"
+				Equipment_Description as "Equipment Description"
+				Next_Calibration_Date as "Next Calibration Date"
+			)
+		}
+		default list All_Technicians
+		{
+			displayName = "All Technicians"
+			show all rows from Technician_Form    
+			(
+				Technician_ID as "Technician ID"
+				Technician_Name as "Technician Name"
+				Specialization
+				Email
+				Phone_Number1 as "Phone Number"
+				(
+					displayformat = plainnumber 
+				)
+				Qualification
+				Experience
+				Technician_Status as "Technician Status"
+			)
+		}
+		default list All_Calibration_Schedules
+		{
+			displayName = "All Calibration Schedules"
+			show all rows from Calibration_Schedule_Form    
+			(
+				Schedule_ID as "Schedule ID"
+				Equipment
+				Laboratory
+				Calibration_Type as "Calibration Type"
+				Scheduled_Date as "Scheduled Date"
+				Assigned_Technician as "Assigned Technician"
+				Priority
+				Schedule_Status as "Schedule Status"
+				Remarks
+			)
+		}
+		default list All_Calibration_Records
+		{
+			displayName = "All Calibration Records"
+			show all rows from Calibration_Record_Form    
+			(
+				Calibration_Record_ID as "Calibration Record ID"
+				Equipment
+				Calibration_Date as "Calibration Date"
+				Technician
+				Calibration_Method as "Calibration Method"
+				Calibration_Result as "Calibration Result"
+				Overall_Remarks as "Overall Remarks"
+				Next_Calibration_Date as "Next Calibration Date"
+				Calibration_Parameters.Parameter_Name as "Calibration Parameters"
+				Unit
+				Result
+				Remarks
+			)
+		}
+		default list All_Calibration_Certificates
+		{
+			displayName = "All Calibration Certificates"
+			show all rows from Calibration_Certificate_Form    
+			(
+				Certificate_ID as "Certificate ID"
+				Certificate_Number as "Certificate Number"
+				Equipment
+				Calibration_Record_Form as "Calibration Record Form"
+				Issue_Date as "Issue Date"
+				Valid_From as "Valid From"
+				Valid_Until as "Valid Until"
+				Certificate_Status as "Certificate Status"
+				Certificate_File as "Certificate File"
+				Remarks
+			)
+		}
+		default list All_Maintenance_Requests
+		{
+			displayName = "All Maintenance Requests"
+			show all rows from Maintenance_Request_Form    
+			(
+				Maintenance_ID as "Maintenance ID"
+				Equipment
+				Laboratory
+				Reported_By as "Reported By"
+				Request_Date as "Request Date"
+				Problem_Type as "Problem Type"
+				Problem_Description as "Problem Description"
+				Priority
+				Assigned_Technician as "Assigned Technician"
+				Maintenance_Status as "Maintenance Status"
+				Completion_Date as "Completion Date"
+				Repair_Cost as "Repair Cost"
+				Repair_Remarks as "Repair Remarks"
+			)
+		}
+		default list All_Equipment_Inspections
+		{
+			displayName = "All Equipment Inspections"
+			show all rows from Equipment_Inspection_Form    
+			(
+				Inspection_ID as "Inspection ID"
+				Equipment_Form as "Equipment Form"
+				Inspection_Date as "Inspection Date"
+				Inspector
+				Physical_Condition as "Physical Condition"
+				Functional_Condition as "Functional Condition"
+				Safety_Condition as "Safety Condition"
+				Inspection_Result as "Inspection Result"
+				Issues_Found as "Issues Found"
+				Recommended_Action as "Recommended Action"
+				Inspection_Remarks as "Inspection Remarks"
+			)
+		}
+		list Equipment_Report
+		{
+			displayName = "Equipment Report"
+			show all rows from Equipment_Form    
+			(
+				Equipment_ID as "Equipment ID"
+				Equipment_Name as "Equipment Name"
+				Equipment_Category as "Equipment Category"
+				Laboratory
+				Manufacturer
+				Model_Number as "Model Number"
+				Serial_Number as "Serial Number"
+				Purchase_Date as "Purchase Date"
+				Purchase_Cost as "Purchase Cost"
+				Last_Calibration_Date as "Last Calibration Date"
+				Calibration_Interval as "Calibration Interval"
+				Next_Calibration_Date as "Next Calibration Date"
+				Equipment_Status as "Equipment Status"
+				Equipment_Image as "Equipment Image"
+				Equipment_Description as "Equipment Description"
+			)
+		}
+		list Calibration_Schedule_Report
+		{
+			displayName = "Calibration Schedule Report"
+			show all rows from Calibration_Schedule_Form    
+			(
+				Schedule_ID as "Schedule ID"
+				Equipment
+				Laboratory
+				Calibration_Type as "Calibration Type"
+				Scheduled_Date as "Scheduled Date"
+				Assigned_Technician as "Assigned Technician"
+				Priority
+				Schedule_Status as "Schedule Status"
+				Remarks
+			)
+		}
+		list Calibration_History_Report
+		{
+			displayName = "Calibration History Report"
+			show all rows from Calibration_Record_Form    
+			(
+				Calibration_Record_ID as "Calibration Record ID"
+				Equipment
+				Calibration_Date as "Calibration Date"
+				Technician
+				Calibration_Method as "Calibration Method"
+				Calibration_Result as "Calibration Result"
+				Overall_Remarks as "Overall Remarks"
+				Next_Calibration_Date as "Next Calibration Date"
+				Unit
+				Result
+				Remarks
+			)
+		}
+		list Calibration_Status_Report
+		{
+			displayName = "Calibration Status Report"
+			show all rows from Calibration_Record_Form    
+			(
+				Calibration_Record_ID as "Calibration Record ID"
+				Equipment
+				Calibration_Date as "Calibration Date"
+				Technician
+				Calibration_Method as "Calibration Method"
+				Calibration_Result as "Calibration Result"
+				Overall_Remarks as "Overall Remarks"
+				Next_Calibration_Date as "Next Calibration Date"
+				Unit
+				Result
+				Remarks
+			)
+		}
+		list Certificate_Expiry_Report
+		{
+			displayName = "Certificate Expiry Report"
+			show all rows from Calibration_Certificate_Form    
+			(
+				Certificate_ID as "Certificate ID"
+				Certificate_Number as "Certificate Number"
+				Equipment
+				Calibration_Record_Form as "Calibration Record Form"
+				Issue_Date as "Issue Date"
+				Valid_From as "Valid From"
+				Valid_Until as "Valid Until"
+				Certificate_Status as "Certificate Status"
+				Certificate_File as "Certificate File"
+				Remarks
+			)
+		}
+		list Maintenance_Report
+		{
+			displayName = "Maintenance Report"
+			show all rows from Maintenance_Request_Form    
+			(
+				Maintenance_ID as "Maintenance ID"
+				Equipment
+				Laboratory
+				Reported_By as "Reported By"
+				Request_Date as "Request Date"
+				Problem_Type as "Problem Type"
+				Problem_Description as "Problem Description"
+				Priority
+				Assigned_Technician as "Assigned Technician"
+				Maintenance_Status as "Maintenance Status"
+				Completion_Date as "Completion Date"
+				Repair_Cost as "Repair Cost"
+				Repair_Remarks as "Repair Remarks"
+			)
+		}
+		list Technician_Workload_Report
+		{
+			displayName = "Technician Workload Report"
+			show all rows from Calibration_Schedule_Form    
+			(
+				Schedule_ID as "Schedule ID"
+				Equipment
+				Laboratory
+				Calibration_Type as "Calibration Type"
+				Scheduled_Date as "Scheduled Date"
+				Assigned_Technician as "Assigned Technician"
+				Priority
+				Schedule_Status as "Schedule Status"
+				Remarks
+			)
+		}
+	}
+	pages
+	{
+		page Calibration_Dashboard
+		{
+			displayname = "Calibration Dashboard"
+			Content="<zml    \n\t\t\tisPdfEnabled='true'\n\t\t\n\t\t\tisPrintEnabled='true'\n\t\t\n\t\t\n\t\t\n\t\t\n>\n\t<layout>\n\t<row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<row>\n\t<column\n   \t\t width='34%'\n   \t>\n\t<panel elementName='kpi_total_equipment.stat.outlined.comfortable'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tbgColor = 'transparent'\n        bgColorType = 'noFill'\n\n\t\twidth = '100%'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '0px'\n\tbgColor = '#FFFFFF'\n\n    borderColor = '#F0F0F0'\n    borderWidth = '1px'\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n    \tcornerRadius = '8px'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpaddingTop = '24px'\n\tpaddingLeft = '24px'\n\tpaddingRight = '24px'\n\tpaddingBottom = '24px'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='auto'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<text \n\n\tcolor = '#575757'\n\tsize = '13px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Total Equipment'\n>\n</text>\n\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='8px'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n>\n\t\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='auto'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<text \n\n\tcolor = '#1C1C1C'\n\tsize = '30px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t  value = 'thisapp.Equipment_Form.ID.count'\n>\n</text>\n\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='8px'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n>\n\t\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='auto'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<text \n\n\tcolor = '#575757'\n\tsize = '12px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Total Equipment Records'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column><column\n   \t\t width='33%'\n   \t>\n\t<panel elementName='kpi_passed_calibrations.stat.outlined.comfortable'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tbgColor = 'transparent'\n        bgColorType = 'noFill'\n\n\t\twidth = '100%'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '0px'\n\tbgColor = '#FFFFFF'\n\n    borderColor = '#F0F0F0'\n    borderWidth = '1px'\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n    \tcornerRadius = '8px'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '24px'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='auto'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<text \n\n\tcolor = '#115E59'\n\tsize = '13px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Passed Calibrations'\n>\n</text>\n\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='8px'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t\n</pc>\n</pr>\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='auto'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<text \n\n\tcolor = '#115E59'\n\tsize = '30px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t\tcriteria = 'Calibration_Result == &quot;Passed&quot;'\n\t  value = 'thisapp.Calibration_Record_Form.ID.count'\n>\n</text>\n\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='8px'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t\n</pc>\n</pr>\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='auto'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<text \n\n\tcolor = '#115E59'\n\tsize = '12px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Passed Calibrations'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column><column\n   \t\t width='33%'\n   \t>\n\t<panel elementName='kpi_failed_calibrations.stat.outlined.comfortable'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tbgColor = 'transparent'\n        bgColorType = 'noFill'\n\n\t\twidth = '100%'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '0px'\n\tbgColor = '#FFFFFF'\n\n    borderColor = '#F0F0F0'\n    borderWidth = '1px'\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n    \tcornerRadius = '8px'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpaddingTop = '24px'\n\tpaddingLeft = '24px'\n\tpaddingRight = '24px'\n\tpaddingBottom = '24px'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='auto'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<text \n\n\tcolor = '#991B1B'\n\tsize = '13px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Failed Calibrations'\n>\n</text>\n\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='8px'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n>\n\t\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='auto'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<text \n\n\tcolor = '#991B1B'\n\tsize = '30px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t\tcriteria = 'Calibration_Result == &quot;Failed&quot;'\n\t  value = 'thisapp.Calibration_Record_Form.ID.count'\n>\n</text>\n\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='8px'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n>\n\t\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='auto'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<text \n\n\tcolor = '#991B1B'\n\tsize = '12px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Failed Calibrations'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column>\n</row><row>\n\t<column\n   \t\t width='33%'\n   \t>\n\t<panel elementName='kpi_overdue_calibrations.stat.outlined.comfortable'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tbgColor = 'transparent'\n        bgColorType = 'noFill'\n\n\t\twidth = '100%'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '24px'\n\tbgColor = 'transparent'\n        bgColorType = 'noFill'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tcolor = '#991B1B'\n\tsize = '13px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Overdue Calibrations'\n>\n</text>\n\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='auto'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<text \n\n\tcolor = '#991B1B'\n\tsize = '30px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t\tcriteria = 'Next_Calibration_Date &lt; &quot;2025-01-01&quot;'\n\t  value = 'thisapp.Equipment_Form.ID.count'\n>\n</text>\n\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='8px'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t\n</pc>\n</pr>\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='auto'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<text \n\n\tcolor = '#991B1B'\n\tsize = '12px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Overdue Calibrations'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column><column\n   \t\t width='34%'\n   \t>\n\t<panel elementName='kpi_upcoming_calibration.stat.outlined.comfortable'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tbgColor = 'transparent'\n        bgColorType = 'noFill'\n\n\t\twidth = '100%'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '0px'\n\tbgColor = '#FFFFFF'\n\n    borderColor = '#F0F0F0'\n    borderWidth = '1px'\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n    \tcornerRadius = '8px'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpaddingTop = '24px'\n\tpaddingLeft = '24px'\n\tpaddingRight = '24px'\n\tpaddingBottom = '24px'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='auto'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<text \n\n\tcolor = '#854F0B'\n\tsize = '13px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Upcoming Calibrations'\n>\n</text>\n\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='8px'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n>\n\t\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='auto'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<text \n\n\tcolor = '#854F0B'\n\tsize = '30px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t\tcriteria = 'Next_Calibration_Date &gt;= &quot;2025-01-01&quot; &amp;&amp; Next_Calibration_Date &lt;= &quot;2025-12-31&quot;'\n\t  value = 'thisapp.Equipment_Form.ID.count'\n>\n</text>\n\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='8px'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n>\n\t\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='auto'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<text \n\n\tcolor = '#854F0B'\n\tsize = '12px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Upcoming Calibrations'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column><column\n   \t\t width='33%'\n   \t>\n\t<panel elementName='Pending_Maintenance_Requ.stat.outlined.comfortable'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tbgColor = 'transparent'\n        bgColorType = 'noFill'\n\n\t\twidth = '100%'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '0px'\n\tbgColor = '#FFFFFF'\n\n    borderColor = '#F0F0F0'\n    borderWidth = '1px'\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n    \tcornerRadius = '8px'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpaddingTop = '24px'\n\tpaddingLeft = '24px'\n\tpaddingRight = '24px'\n\tpaddingBottom = '24px'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='auto'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<text \n\n\tcolor = '#575757'\n\tsize = '13px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Pending Maintenance Requests'\n>\n</text>\n\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='8px'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n>\n\t\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='auto'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<text \n\n\tcolor = '#1C1C1C'\n\tsize = '30px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t\tcriteria = 'Maintenance_Status != &quot;Completed&quot; &amp;&amp; Maintenance_Status != &quot;Cancelled&quot;'\n\t  value = 'thisapp.Maintenance_Request_Form.ID.count'\n>\n</text>\n\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='8px'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n>\n\t\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='auto'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<text \n\n\tcolor = '#575757'\n\tsize = '12px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Pending Maintenance Requests'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column>\n</row>\n</column>\n</row><row>\n\t<column\n   \t\t width='33%'\n   \t>\n\t<chart \n\telementName='Chart 1'\n\n\t\n\ttitle = 'Equipment by Category'\n\t\n\t\ttitleColor = '#222326'\n\ttype = 'Column'\n\tbgColor = '#FFFFFF'\n\ttheme = 'theme'\n\tlegendPos = 'right.center'\n\theightType = 'auto'\n\theightValue = '300px'\n\tappLinkName = 'thisapp'\n\tformLinkName = 'Equipment_Form'\n\txfield = 'Equipment_Category'\n\tyfields = 'count:ID'\n\tshowDataLabel = 'true'\n/>\n\n</column><column\n   \t\t width='33%'\n   \t>\n\t<chart \n\telementName='Chart'\n\n\t\n\ttitle = 'Calibration Results'\n\t\n\t\ttitleColor = '#222326'\n\ttype = 'Donut'\n\tbgColor = '#FFFFFF'\n\ttheme = 'theme'\n\tlegendPos = 'right.center'\n\theightType = 'auto'\n\theightValue = '300px'\n\tappLinkName = 'thisapp'\n\tformLinkName = 'Calibration_Record_Form'\n\txfield = 'Calibration_Result'\n\tyfields = 'count:ID'\n\tshowDataLabel = 'true'\n/>\n\n</column><column\n   \t\t width='34%'\n   \t>\n\t<chart \n\telementName='Chart 2'\n\n\t\n\ttitle = 'Maintenance Requests by Status'\n\t\n\t\ttitleColor = '#222326'\n\ttype = 'Column'\n\tbgColor = '#FFFFFF'\n\ttheme = 'theme'\n\tlegendPos = 'right.center'\n\theightType = 'auto'\n\theightValue = '300px'\n\tappLinkName = 'thisapp'\n\tformLinkName = 'Maintenance_Request_Form'\n\txfield = 'Maintenance_Status'\n\tyfields = 'count:ID'\n\tshowDataLabel = 'true'\n/>\n\n</column>\n</row><row>\n\t<column\n   \t\t width='50%'\n   \t>\n\t<chart \n\telementName='Chart 3'\n\n\t\n\ttitle = 'Equipment by Status'\n\t\n\t\ttitleColor = '#222326'\n\ttype = 'Pie'\n\tbgColor = '#FFFFFF'\n\ttheme = 'theme'\n\tlegendPos = 'center.top'\n\theightType = 'auto'\n\theightValue = '300px'\n\tappLinkName = 'thisapp'\n\tformLinkName = 'Equipment_Form'\n\txfield = 'Equipment_Status'\n\tyfields = 'count:Equipment_ID'\n/>\n\n</column><column\n   \t\t width='50%'\n   \t>\n\t<chart \n\telementName='Chart 4'\n\n\t\n\ttitle = 'Monthly Calibration Trends'\n\t\n\t\ttitleColor = '#222326'\n\ttype = 'Line'\n\tbgColor = '#FFFFFF'\n\ttheme = 'theme'\n\tlegendPos = 'center.top'\n\theightType = 'auto'\n\theightValue = '300px'\n\tappLinkName = 'thisapp'\n\tformLinkName = 'Calibration_Schedule_Form'\n\txfield = 'Scheduled_Date'\n\tyfields = 'count:Schedule_ID'\n\tdateGrouping = 'month_year'\n/>\n\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<report \n\telementName='Report 1'\n\n\t\tappLinkName = 'thisapp'\n\t\tlinkName = 'All_Calibration_Schedules'\n\t\tcriteriaString = 'Schedule_Status == &quot;Overdue&quot;'\n\t\n\t\tiszreport = 'false'\n\theightType = 'auto'\n\theightValue = '700'\n/>\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<report \n\telementName='Report'\n\n\t\tappLinkName = 'thisapp'\n\t\tlinkName = 'All_Equipment'\n\t\n\t\tiszreport = 'false'\n\t\t\t\t\tzc_EditRec = 'false'\n\t\t\t\t\tzc_Print = 'false'\n\t\t\t\t\tzc_Export = 'false'\n\t\t\t\t\tzc_DelRec = 'false'\n\theightType = 'auto'\n\theightValue = '700'\n/>\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<report \n\telementName='Report 2'\n\n\t\tappLinkName = 'thisapp'\n\t\tlinkName = 'All_Calibration_Schedules'\n\t\tcriteriaString = 'Scheduled_Date &gt; zoho.currentdate &amp;&amp; Schedule_Status != &quot;Completed&quot; &amp;&amp; Schedule_Status != &quot;Cancelled&quot;'\n\t\n\t\tiszreport = 'false'\n\theightType = 'auto'\n\theightValue = '700'\n/>\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<report \n\telementName='Report 4'\n\n\t\tappLinkName = 'thisapp'\n\t\tlinkName = 'All_Maintenance_Requests'\n\t\tcriteriaString = 'Maintenance_Status != &quot;Completed&quot; &amp;&amp; Maintenance_Status != &quot;Cancelled&quot;'\n\t\n\t\tiszreport = 'false'\n\theightType = 'auto'\n\theightValue = '700'\n/>\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<report \n\telementName='Report 3'\n\n\t\tappLinkName = 'thisapp'\n\t\tlinkName = 'Certificate_Expiry_Report'\n\t\n\t\tiszreport = 'false'\n\theightType = 'auto'\n\theightValue = '700'\n/>\n</column>\n</row>\n</column>\n</row>\n</column>\n</row>\n</layout>\n</zml>"
+		}
+	}
+
+
+		 functions
+		 {
+			 Deluge
+			 {
+				 void checkCalibrationStatus()
+                 {
+                 	today = zoho.currentdate;
+                 	info "Calibration status check executed on: " + today;
+                 }
+			 }
+		 }
+
+
+		workflow
+		{
+		form
+		{
+			Calibration_Record_Submis as "Calibration Record Submission Workflow"
+			{
+				type =  form
+				form = Calibration_Record_Form
+
+				record event = on add
+
+				on success
+				{
+					actions 
+					{
+						sendmail
+						(
+							from : "zoho.loginuserid"
+							to : "dharshini.g2.2024.cse@rajalakshmi.edu.in"
+							subject : "Record Added"
+							message : "<div>${zoho.loginuserid} has added a record in form Calibration Record Form<br></div>"
+						)
+					}
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Calibration_Date != null)
+										{
+											input.Next_Calibration_Date = input.Calibration_Date.addMonth(6);
+										}
+						)
+					}
+				}
+
+			}
+			Certificate_Submission_No as "Certificate Submission Notification"
+			{
+				type =  form
+				form = Calibration_Certificate_Form
+
+				record event = on add
+
+				on success
+				{
+					actions 
+					{
+						sendmail
+						(
+							from : "zoho.adminuserid"
+							to : "dharshini.g2.2024.cse@rajalakshmi.edu.in"
+							subject : "Calibration Certificate Created"
+							message : "<div><span>A new calibration certificate has been created in CALIBTRACK. Please check the certificate details in the application.</span> <br></div>"
+						)
+					}
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Valid_Until <= zoho.currentdate.addDay(7))
+										{
+											sendmail
+											[
+												from :zoho.loginuserid
+												to :"dharshini.g2.2024.cse@rajalakshmi.edu.in"
+												subject :"CALIBTRACK - Certificate Expiry Alert"
+												message :"Dear Admin,\n\nA calibration certificate is expiring soon.\n\nCertificate ID: " + input.Certificate_ID + "\nCertificate Number: " + input.Certificate_Number + "\nValid Until: " + input.Valid_Until + "\n\nPlease arrange certificate renewal.\n\nRegards,\nCALIBTRACK System"
+											]
+										}
+						)
+					}
+				}
+
+			}
+			Maintenance_Request_Notif as "Maintenance Request Notification"
+			{
+				type =  form
+				form = Maintenance_Request_Form
+
+				record event = on add
+
+				on success
+				{
+					actions 
+					{
+						sendmail
+						(
+							from : "zoho.adminuserid"
+							to : "dharshini.g2.2024.cse@rajalakshmi.edu.in"
+							subject : "New Maintenance Request Created"
+							message : "<div>A new maintenance request has been submitted in CALIBTRACK. Please open the application to review the request and assign a technician <br></div>"
+						)
+					}
+				}
+
+			}
+			Calculate_Next_Calibratio as "Calculate Next Calibration Date"
+			{
+				type =  form
+				form = Calibration_Record_Form
+
+				record event = on add
+
+				on user input of Calibration_Date
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Calibration_Date != null)
+										{
+											input.Next_Calibration_Date = input.Calibration_Date.addMonth(6);
+										}
+						)
+					}
+				}
+
+			}
+			Failed_Calibration_Alert as "Failed Calibration Alert"
+			{
+				type =  form
+				form = Calibration_Record_Form
+
+				record event = on add
+
+				on success
+				{
+					actions  (Calibration_Result == "Failed")
+					{
+						sendmail
+						(
+							from : "zoho.adminuserid"
+							to : "dharshini.g2.2024.cse@rajalakshmi.edu.in"
+							subject : "Calibration Failed - Action Required"
+							message : "<div><span>A calibration record has failed. Please inspect the equipment</span> <br></div>"
+						)
+					}
+				}
+
+			}
+			Equipment_Status_on_Failu as "Equipment Status on Failure"
+			{
+				type =  form
+				form = Calibration_Record_Form
+
+				record event = on add
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Calibration_Result == "Failed")
+										{
+											info "Calibration failed. Equipment requires inspection.";
+										}
+						)
+					}
+				}
+
+			}
+			Calibration_Schedule_Stat as "Calibration Schedule Status Check"
+			{
+				type =  form
+				form = Calibration_Schedule_Form
+
+				record event = on add
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Scheduled_Date < zoho.currentdate)
+										{
+											input.Schedule_Status = "Overdue";
+										}
+						)
+					}
+				}
+
+			}
+			Technician_Assignment_Not as "Technician Assignment Notification"
+			{
+				type =  form
+				form = Calibration_Schedule_Form
+
+				record event = on add
+
+				on success
+				{
+					actions 
+					{
+						sendmail
+						(
+							from : "zoho.adminuserid"
+							to : "dharshini.g2.2024.cse@rajalakshmi.edu.in"
+							subject : "New Calibration Task Assigned"
+							message : "<p><span>${Assigned_Technician}Dear Technician,</span><br></p><p><span>A new calibration task has been assigned to you.</span><br></p><p><span>Please log in to CALIBTRACK and check the Calibration Schedule Form for the equipment details and scheduled date.</span><br></p><p><span>Please complete the calibration on time.</span><br></p><p><br></p><div><span>Thank you,</span><br></div><div><span>CALIBTRACK System</span><br></div><p><br></p><div><br></div>"
+						)
+					}
+					actions 
+					{
+						custom deluge script
+						(
+											technicianRecord = Technician_Form[ID == input.Assigned_Technician];
+										if(technicianRecord.count() > 0)
+										{
+											technicianEmail = technicianRecord.Email;
+											if(technicianEmail != null && technicianEmail != "")
+											{
+												sendmail
+												[
+													from :zoho.adminuserid
+													to :technicianEmail
+													subject :"New Calibration Task Assigned - CALIBTRACK"
+													message :"Dear Technician,<br><br>A new calibration task has been assigned to you. Please log in to CALIBTRACK and check your calibration schedule.<br><br>Thank you,<br>CALIBTRACK System"
+												]
+											}
+										}
+						)
+					}
+				}
+
+			}
+			Technician_Registration_N as "Technician Registration Notification"
+			{
+				type =  form
+				form = Technician_Form
+
+				record event = on add
+
+				on success
+				{
+					actions 
+					{
+						sendmail
+						(
+							from : "zoho.adminuserid"
+							to : "dharshini.g2.2024.cse@rajalakshmi.edu.in"
+							subject : "New Technician Registered - CALIBTRACK"
+							message : "<p><span>A new technician has registered in CALIBTRACK.</span><br></p><p><span>Please check the Technician Form to view the technician's details.</span><br></p><p></p><div><span>Thank you,</span><br></div><div><span>CALIBTRACK System</span><br></div><p></p><div><br></div>"
+						)
+					}
+				}
+
+			}
+			Equipment_Inspection_Fail as "Equipment Inspection Failure Alert"
+			{
+				type =  form
+				form = Equipment_Inspection_Form
+
+				record event = on add
+
+				on success
+				{
+					actions 
+					{
+						sendmail
+						(
+							from : "zoho.adminuserid"
+							to : "dharshini.g2.2024.cse@rajalakshmi.edu.in"
+							subject : "CALIBTRACK - Inspection Failure Alert"
+							message : "<div><span>An equipment inspection has failed. Please review the inspection record and take corrective action</span> <br></div>"
+						)
+					}
+				}
+
+			}
+		}
+
+		schedule
+		{
+			Enter_Daily_Calibration_S as "Enter Daily Calibration Status Check"
+			{
+				type =  schedule
+				start = "2026-10-14 18:05:54"
+				frequency = daily
+				time zone = "UTC"
+				on start
+				{
+					actions 
+					{
+					on load
+					(
+						todayDate = zoho.currentdate;
+										for each  schedule in Calibration_Schedule_Form
+										{
+											// OVERDUE CALIBRATION ALERT
+											if(schedule.Scheduled_Date < todayDate && schedule.Schedule_Status != "Completed" && schedule.Schedule_Status != "Cancelled")
+											{
+												sendmail
+												[
+													from :zoho.loginuserid
+													to :"dharshini.g2.2024.cse@rajalakshmi.edu.in"
+													subject :"CALIBTRACK - Overdue Calibration Alert"
+													message :"Dear CALIBTRACK Admin,\n\nAn overdue calibration schedule has been identified.\n\nSchedule ID: " + schedule.Schedule_ID + "\nEquipment: " + schedule.Equipment + "\nScheduled Date: " + schedule.Scheduled_Date + "\nAssigned Technician: " + schedule.Assigned_Technician + "\n\nPlease arrange the calibration as soon as possible.\n\nRegards,\nCALIBTRACK System"
+												]
+											}
+											// UPCOMING CALIBRATION REMINDER
+											if(schedule.Scheduled_Date >= todayDate && schedule.Scheduled_Date <= todayDate.addDay(7) && schedule.Schedule_Status != "Completed" && schedule.Schedule_Status != "Cancelled")
+											{
+												sendmail
+												[
+													from :zoho.loginuserid
+													to :"dharshini.g2.2024.cse@rajalakshmi.edu.in"
+													subject :"CALIBTRACK - Upcoming Calibration Reminder"
+													message :"Dear CALIBTRACK Admin,\n\nCalibration is due within 7 days.\n\nSchedule ID: " + schedule.Schedule_ID + "\nEquipment: " + schedule.Equipment + "\nScheduled Date: " + schedule.Scheduled_Date + "\nAssigned Technician: " + schedule.Assigned_Technician + "\n\nPlease prepare for calibration.\n\nRegards,\nCALIBTRACK System"
+												]
+											}
+										}
+					)
+					}
+				}
+			}
+		}
+
+
+
+
+	}
+	share_settings
+	{
+			"Read"
+			{
+				name = "Read"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have read permission for all components\n"
+			}
+			"Write"
+			{
+				name = "Write"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have write permission for all components\n"
+			}
+			"Administrator"
+			{
+				name = "Administrator"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have all the permissions.\n"
+			}
+			"Technician Permission"
+			{
+				name = "Technician Permission"
+				type = Users_Permissions
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Allows technicians to view equipment and calibration records and manage assigned work\n"
+				ModulePermissions
+				{
+					Calibration_Schedule_Form
+					{
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							All_Calibration_Schedules={"View"}
+							Technician_Workload_Report={"View"}
+							Calibration_Schedule_Report={"View"}
+						}
+					}
+					Technician_Form
+					{
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							All_Technicians={"View"}
+						}
+					}
+					Equipment_Form
+					{
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							All_Equipment={"View"}
+							Equipment_Report={"View"}
+						}
+					}
+					Laboratory_Form
+					{
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							All_Laboratories={"View"}
+						}
+					}
+					Equipment_Inspection_Form
+					{
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+					}
+					Maintenance_Request_Form
+					{
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							Maintenance_Report={"View"}
+							All_Maintenance_Requests={"View"}
+						}
+					}
+					Calibration_Certificate_Form
+					{
+						allFieldsVisible= true 
+					}
+					New_Request
+					{
+						allFieldsVisible= true 
+					}
+					Calibration_Record_Form
+					{
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							All_Calibration_Records={"View"}
+							Calibration_History_Report={"View"}
+							Calibration_Status_Report={"View"}
+						}
+					}
+				}
+			}
+			"Customer"
+			{
+				name = "Customer"
+				type = Customer_Portal
+				permissions = {Chat:false, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This is the default profile having only add and view permission.\n"
+			}
+			roles
+			{
+				"CEO"
+				{
+					description = "User belonging to this role can access data of all other users."
+					"Laboratory Technician"
+					{
+						description = "Responsible for equipment calibration, inspection, and maintenance records"
+					}
+					"Equipment Manager"
+					{
+						description = "Responsible for equipment records, calibration schedules, certificates, and maintenance requests"
+					}
+					"Calibration Supervisor"
+					{
+						description = "Responsible for reviewing calibration results, approving certificates, and monitoring calibration schedules"
+					}
+				}
+			}
+	}
+
+
+	web
+	{
+		forms
+		{
+			form Calibration_Certificate_Form
+			{
+				label placement = left
+			}
+			form Calibration_Record_Form
+			{
+				label placement = left
+			}
+			form Calibration_Schedule_Form
+			{
+				label placement = left
+			}
+			form Equipment_Form
+			{
+				label placement = left
+			}
+			form Equipment_Inspection_Form
+			{
+				label placement = left
+			}
+			form Laboratory_Form
+			{
+				label placement = left
+			}
+			form Maintenance_Request_Form
+			{
+				label placement = left
+			}
+			form New_Request
+			{
+				label placement = left
+			}
+			form Technician_Form
+			{
+				label placement = left
+			}
+		}
+		reports
+		{
+			report All_Laboratories
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Laboratory_ID as "Laboratory ID"
+								Laboratory_Name as "Laboratory Name"
+								Department
+								Location
+								Floor_Room_No as "Floor / Room No."
+								Lab_In_charge as "Lab In-charge"
+								Contact_Number as "Contact Number"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Laboratory_ID as "Laboratory ID"
+								Laboratory_Name as "Laboratory Name"
+								Department
+								Location
+								Floor_Room_No as "Floor / Room No."
+								Lab_In_charge as "Lab In-charge"
+								Contact_Number as "Contact Number"
+								Email
+								Laboratory_Status as "Laboratory Status"
+								Description
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report All_Equipment
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Equipment_ID as "Equipment ID"
+								Equipment_Name as "Equipment Name"
+								Equipment_Category as "Equipment Category"
+								Laboratory
+								Manufacturer
+								Model_Number as "Model Number"
+								Serial_Number as "Serial Number"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Equipment_ID as "Equipment ID"
+								Equipment_Name as "Equipment Name"
+								Equipment_Category as "Equipment Category"
+								Laboratory
+								Manufacturer
+								Model_Number as "Model Number"
+								Serial_Number as "Serial Number"
+								Purchase_Date as "Purchase Date"
+								Purchase_Cost as "Purchase Cost"
+								Last_Calibration_Date as "Last Calibration Date"
+								Calibration_Interval as "Calibration Interval"
+								Equipment_Status as "Equipment Status"
+								Equipment_Image as "Equipment Image"
+								Equipment_Description as "Equipment Description"
+								Next_Calibration_Date as "Next Calibration Date"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report All_Technicians
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Technician_ID as "Technician ID"
+								Technician_Name as "Technician Name"
+								Specialization
+								Email
+								Phone_Number1 as "Phone Number"
+								Qualification
+								Experience
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Technician_ID as "Technician ID"
+								Technician_Name as "Technician Name"
+								Specialization
+								Email
+								Phone_Number1 as "Phone Number"
+								Qualification
+								Experience
+								Technician_Status as "Technician Status"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report All_Calibration_Schedules
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Schedule_ID as "Schedule ID"
+								Equipment
+								Laboratory
+								Calibration_Type as "Calibration Type"
+								Scheduled_Date as "Scheduled Date"
+								Assigned_Technician as "Assigned Technician"
+								Priority
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Schedule_ID as "Schedule ID"
+								Equipment
+								Laboratory
+								Calibration_Type as "Calibration Type"
+								Scheduled_Date as "Scheduled Date"
+								Assigned_Technician as "Assigned Technician"
+								Priority
+								Schedule_Status as "Schedule Status"
+								Remarks
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report All_Calibration_Records
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Calibration_Record_ID as "Calibration Record ID"
+								Equipment
+								Calibration_Date as "Calibration Date"
+								Technician
+								Calibration_Method as "Calibration Method"
+								Calibration_Result as "Calibration Result"
+								Overall_Remarks as "Overall Remarks"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Calibration_Record_ID as "Calibration Record ID"
+								Equipment
+								Calibration_Date as "Calibration Date"
+								Technician
+								Calibration_Method as "Calibration Method"
+								Calibration_Result as "Calibration Result"
+								Overall_Remarks as "Overall Remarks"
+								Next_Calibration_Date as "Next Calibration Date"
+								Calibration_Parameters.Parameter_Name as "Calibration Parameters"
+								Unit
+								Result
+								Remarks
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report All_Calibration_Certificates
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Certificate_ID as "Certificate ID"
+								Certificate_Number as "Certificate Number"
+								Equipment
+								Calibration_Record_Form as "Calibration Record Form"
+								Issue_Date as "Issue Date"
+								Valid_From as "Valid From"
+								Valid_Until as "Valid Until"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Certificate_ID as "Certificate ID"
+								Certificate_Number as "Certificate Number"
+								Equipment
+								Calibration_Record_Form as "Calibration Record Form"
+								Issue_Date as "Issue Date"
+								Valid_From as "Valid From"
+								Valid_Until as "Valid Until"
+								Certificate_Status as "Certificate Status"
+								Certificate_File as "Certificate File"
+								Remarks
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report All_Maintenance_Requests
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Maintenance_ID as "Maintenance ID"
+								Equipment
+								Laboratory
+								Reported_By as "Reported By"
+								Request_Date as "Request Date"
+								Problem_Type as "Problem Type"
+								Problem_Description as "Problem Description"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Maintenance_ID as "Maintenance ID"
+								Equipment
+								Laboratory
+								Reported_By as "Reported By"
+								Request_Date as "Request Date"
+								Problem_Type as "Problem Type"
+								Problem_Description as "Problem Description"
+								Priority
+								Assigned_Technician as "Assigned Technician"
+								Maintenance_Status as "Maintenance Status"
+								Completion_Date as "Completion Date"
+								Repair_Cost as "Repair Cost"
+								Repair_Remarks as "Repair Remarks"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report All_Equipment_Inspections
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Inspection_ID as "Inspection ID"
+								Equipment_Form as "Equipment Form"
+								Inspection_Date as "Inspection Date"
+								Inspector
+								Physical_Condition as "Physical Condition"
+								Functional_Condition as "Functional Condition"
+								Safety_Condition as "Safety Condition"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Inspection_ID as "Inspection ID"
+								Equipment_Form as "Equipment Form"
+								Inspection_Date as "Inspection Date"
+								Inspector
+								Physical_Condition as "Physical Condition"
+								Functional_Condition as "Functional Condition"
+								Safety_Condition as "Safety Condition"
+								Inspection_Result as "Inspection Result"
+								Issues_Found as "Issues Found"
+								Recommended_Action as "Recommended Action"
+								Inspection_Remarks as "Inspection Remarks"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report Equipment_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Equipment_ID as "Equipment ID"
+								Equipment_Name as "Equipment Name"
+								Equipment_Category as "Equipment Category"
+								Laboratory
+								Manufacturer
+								Model_Number as "Model Number"
+								Serial_Number as "Serial Number"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Equipment_ID as "Equipment ID"
+								Equipment_Name as "Equipment Name"
+								Equipment_Category as "Equipment Category"
+								Laboratory
+								Manufacturer
+								Model_Number as "Model Number"
+								Serial_Number as "Serial Number"
+								Purchase_Date as "Purchase Date"
+								Purchase_Cost as "Purchase Cost"
+								Last_Calibration_Date as "Last Calibration Date"
+								Calibration_Interval as "Calibration Interval"
+								Next_Calibration_Date as "Next Calibration Date"
+								Equipment_Status as "Equipment Status"
+								Equipment_Image as "Equipment Image"
+								Equipment_Description as "Equipment Description"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report Calibration_Schedule_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Schedule_ID as "Schedule ID"
+								Equipment
+								Laboratory
+								Calibration_Type as "Calibration Type"
+								Scheduled_Date as "Scheduled Date"
+								Assigned_Technician as "Assigned Technician"
+								Priority
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Schedule_ID as "Schedule ID"
+								Equipment
+								Laboratory
+								Calibration_Type as "Calibration Type"
+								Scheduled_Date as "Scheduled Date"
+								Assigned_Technician as "Assigned Technician"
+								Priority
+								Schedule_Status as "Schedule Status"
+								Remarks
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report Calibration_History_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Calibration_Record_ID as "Calibration Record ID"
+								Equipment
+								Calibration_Date as "Calibration Date"
+								Technician
+								Calibration_Method as "Calibration Method"
+								Calibration_Result as "Calibration Result"
+								Overall_Remarks as "Overall Remarks"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Calibration_Record_ID as "Calibration Record ID"
+								Equipment
+								Calibration_Date as "Calibration Date"
+								Technician
+								Calibration_Method as "Calibration Method"
+								Calibration_Result as "Calibration Result"
+								Overall_Remarks as "Overall Remarks"
+								Next_Calibration_Date as "Next Calibration Date"
+								Unit
+								Result
+								Remarks
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report Calibration_Status_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Calibration_Record_ID as "Calibration Record ID"
+								Equipment
+								Calibration_Date as "Calibration Date"
+								Technician
+								Calibration_Method as "Calibration Method"
+								Calibration_Result as "Calibration Result"
+								Overall_Remarks as "Overall Remarks"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Calibration_Record_ID as "Calibration Record ID"
+								Equipment
+								Calibration_Date as "Calibration Date"
+								Technician
+								Calibration_Method as "Calibration Method"
+								Calibration_Result as "Calibration Result"
+								Overall_Remarks as "Overall Remarks"
+								Next_Calibration_Date as "Next Calibration Date"
+								Unit
+								Result
+								Remarks
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report Certificate_Expiry_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Certificate_ID as "Certificate ID"
+								Certificate_Number as "Certificate Number"
+								Equipment
+								Calibration_Record_Form as "Calibration Record Form"
+								Issue_Date as "Issue Date"
+								Valid_From as "Valid From"
+								Valid_Until as "Valid Until"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Certificate_ID as "Certificate ID"
+								Certificate_Number as "Certificate Number"
+								Equipment
+								Calibration_Record_Form as "Calibration Record Form"
+								Issue_Date as "Issue Date"
+								Valid_From as "Valid From"
+								Valid_Until as "Valid Until"
+								Certificate_Status as "Certificate Status"
+								Certificate_File as "Certificate File"
+								Remarks
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report Maintenance_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Maintenance_ID as "Maintenance ID"
+								Equipment
+								Laboratory
+								Reported_By as "Reported By"
+								Request_Date as "Request Date"
+								Problem_Type as "Problem Type"
+								Problem_Description as "Problem Description"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Maintenance_ID as "Maintenance ID"
+								Equipment
+								Laboratory
+								Reported_By as "Reported By"
+								Request_Date as "Request Date"
+								Problem_Type as "Problem Type"
+								Problem_Description as "Problem Description"
+								Priority
+								Assigned_Technician as "Assigned Technician"
+								Maintenance_Status as "Maintenance Status"
+								Completion_Date as "Completion Date"
+								Repair_Cost as "Repair Cost"
+								Repair_Remarks as "Repair Remarks"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+			report Technician_Workload_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Schedule_ID as "Schedule ID"
+								Equipment
+								Laboratory
+								Calibration_Type as "Calibration Type"
+								Scheduled_Date as "Scheduled Date"
+								Assigned_Technician as "Assigned Technician"
+								Priority
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Schedule_ID as "Schedule ID"
+								Equipment
+								Laboratory
+								Calibration_Type as "Calibration Type"
+								Scheduled_Date as "Scheduled Date"
+								Assigned_Technician as "Assigned Technician"
+								Priority
+								Schedule_Status as "Schedule Status"
+								Remarks
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+		}
+		menu
+		{
+			space Space
+			{
+				displayname = "space"
+				icon = "tech-desktop"
+
+				section Home
+				{
+					displayname = "Home"
+					icon = "ui-1-home-minimal"
+					page Calibration_Dashboard
+					{
+						icon = "ui-1-dashboard-half"
+					}
+				}
+				section Section_1
+				{
+					displayname = "New Request"
+					icon = "ui-1-simple-add"
+					form  New_Request
+					{
+						icon = "ui-1-bold-add"
+					}
+				}
+				section ZC_App_Preferences
+				{
+					displayname = "App Preferences"
+					icon = "design-app"
+					systemcomponent
+					{
+						type = connection
+						displayname = "Connection"
+						icon = "tech-2-device-connection"
+					}
+					systemcomponent
+					{
+						type = localization
+						displayname = "Language Selection"
+						icon = "education-language"
+					}
+				}
+				section ZC_Approvals
+				{
+					displayname = "Approvals"
+					icon = "ui-2-hourglass"
+					systemcomponent
+					{
+						type = approval
+						approval status = completed
+						displayname = "Completed Task"
+						icon = "design-todo"
+					}
+					systemcomponent
+					{
+						type = approval
+						approval status = pending
+						displayname = "Pending Task"
+						icon = "ui-2-hourglass"
+					}
+				}
+				section SharedAnalytics_Section
+				{
+					type = shared_user_report_section
+					displayname = "Reports"
+					icon = "business-chart-bar-33"
+				}
+				section Laboratories
+				{
+					displayname = "Laboratories"
+					icon = "health-flask"
+					form  Laboratory_Form
+					{
+						icon = "health-flask"
+					}
+					report All_Laboratories
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Equipment
+				{
+					displayname = "Equipment"
+					icon = "design-mobile-design"
+					form  Equipment_Form
+					{
+						icon = "design-2-form"
+					}
+					report All_Equipment
+					{
+						icon = "tech-desktop"
+					}
+					report Equipment_Report
+					{
+						icon = "design-2-form"
+					}
+				}
+				section Technicians
+				{
+					displayname = "Technicians"
+					icon = "health-flask"
+					form  Technician_Form
+					{
+						icon = "design-2-form"
+					}
+					report All_Technicians
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Calibration_Schedules
+				{
+					displayname = "Calibration Schedules"
+					icon = "business-calculator"
+					form  Calibration_Schedule_Form
+					{
+						icon = "design-2-form"
+					}
+					report All_Calibration_Schedules
+					{
+						icon = "tech-desktop"
+					}
+					report Calibration_Schedule_Report
+					{
+						icon = "design-2-form"
+					}
+					report Technician_Workload_Report
+					{
+						icon = "design-2-form"
+					}
+				}
+				section Calibration_Records
+				{
+					displayname = "Calibration Records"
+					icon = "health-notebook"
+					form  Calibration_Record_Form
+					{
+						icon = "users-2-voice-record"
+					}
+					report All_Calibration_Records
+					{
+						icon = "tech-desktop"
+					}
+					report Calibration_History_Report
+					{
+						icon = "users-2-voice-record"
+					}
+					report Calibration_Status_Report
+					{
+						icon = "users-2-voice-record"
+					}
+				}
+				section Calibration_Certificates
+				{
+					displayname = "Calibration Certificates"
+					icon = "education-paper-diploma"
+					form  Calibration_Certificate_Form
+					{
+						icon = "education-paper-diploma"
+					}
+					report All_Calibration_Certificates
+					{
+						icon = "tech-desktop"
+					}
+					report Certificate_Expiry_Report
+					{
+						icon = "education-paper-diploma"
+					}
+				}
+				section Maintenance_Requests
+				{
+					displayname = "Maintenance Requests"
+					icon = "tech-2-l-check"
+					form  Maintenance_Request_Form
+					{
+						icon = "tech-2-l-search"
+					}
+					report All_Maintenance_Requests
+					{
+						icon = "tech-desktop"
+					}
+					report Maintenance_Report
+					{
+						icon = "tech-2-l-search"
+					}
+				}
+				section Equipment_Inspections
+				{
+					displayname = "Equipment Inspections"
+					icon = "education-backpack-58"
+					form  Equipment_Inspection_Form
+					{
+						icon = "tech-2-l-search"
+					}
+					report All_Equipment_Inspections
+					{
+						icon = "tech-desktop"
+					}
+				}
+			}
+			preference
+			{
+				icon
+				{
+					style = outline
+					show = {section,component}
+				}
+			}
+		}
+		customize
+		{
+			font = "lato"
+			color options
+			{
+				color = "11"
+			}
+			logo
+			{
+				preference = "app_icon"
+				placement = "left"
+			}
+		}
+	}
+	phone
+	{
+		forms
+		{
+			form Calibration_Certificate_Form
+			{
+				label placement = auto
+			}
+			form Calibration_Record_Form
+			{
+				label placement = auto
+			}
+			form Calibration_Schedule_Form
+			{
+				label placement = auto
+			}
+			form Equipment_Form
+			{
+				label placement = auto
+			}
+			form Equipment_Inspection_Form
+			{
+				label placement = auto
+			}
+			form Laboratory_Form
+			{
+				label placement = auto
+			}
+			form Maintenance_Request_Form
+			{
+				label placement = auto
+			}
+			form New_Request
+			{
+				label placement = auto
+			}
+			form Technician_Form
+			{
+				label placement = auto
+			}
+		}
+		customize
+		{
+			layout = onecolumn
+			font = "default"
+			style = "3"
+			color options
+			{
+				color = rose
+			}
+			logo
+			{
+				preference = "none"
+			}
+		}
+	}
+	tablet
+	{
+		forms
+		{
+			form Calibration_Certificate_Form
+			{
+				label placement = auto
+			}
+			form Calibration_Record_Form
+			{
+				label placement = auto
+			}
+			form Calibration_Schedule_Form
+			{
+				label placement = auto
+			}
+			form Equipment_Form
+			{
+				label placement = auto
+			}
+			form Equipment_Inspection_Form
+			{
+				label placement = auto
+			}
+			form Laboratory_Form
+			{
+				label placement = auto
+			}
+			form Maintenance_Request_Form
+			{
+				label placement = auto
+			}
+			form New_Request
+			{
+				label placement = auto
+			}
+			form Technician_Form
+			{
+				label placement = auto
+			}
+		}
+		customize
+		{
+			layout = slidingpane
+			font = "default"
+			style = "3"
+			color options
+			{
+				color = rose
+			}
+			logo
+			{
+				preference = "none"
+			}
+		}
+	}
+	translation
+{
+{"Language_Settings":{"LANGAGUE_WITH_LOGIN":"browser"}}
+}
+}
